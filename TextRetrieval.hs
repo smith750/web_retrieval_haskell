@@ -14,9 +14,11 @@ openUrl url = case parseURI url of
     Just u  -> liftIO (getResponseBody =<< simpleHTTP (mkRequest GET u))
 	
 --urls = ["http://gutenberg.pglaf.org/4/7/6/5/47651/47651-0.txt","http://gutenberg.pglaf.org/1/4/0/1400/1400.txt"]
+
+wordCount :: String -> Int
+wordCount doc = length $ words $ map toLower doc
 	
-main = do
-	doc <- runMaybeT $ openUrl "http://gutenberg.pglaf.org/1/4/0/1400/1400.txt"
-	wordCount <- length $ map toLower words doc
---	putStrLn wordCount
-	return ()
+main =  (runMaybeT $ openUrl "http://gutenberg.pglaf.org/1/4/0/1400/1400.txt") >>= \doc ->
+		(return (wordCount doc)::IO Int) >>= \wc ->
+--		putStrLn wordCount >>
+		return ()
