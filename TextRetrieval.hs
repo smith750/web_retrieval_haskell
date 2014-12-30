@@ -18,7 +18,7 @@ openUrl url = case parseURI url of
 wordCount :: String -> Int
 wordCount doc = length $ words $ map toLower doc
 	
-main =  (runMaybeT $ openUrl "http://gutenberg.pglaf.org/1/4/0/1400/1400.txt") >>= \doc ->
-		(return (wordCount doc)::IO Int) >>= \wc ->
+--main =  (runMaybeT $ openUrl "http://gutenberg.pglaf.org/1/4/0/1400/1400.txt") >>= \doc ->
+--		(liftM wordCount) >>= \wc ->
 --		putStrLn wordCount >>
-		return ()
+--		return ()
